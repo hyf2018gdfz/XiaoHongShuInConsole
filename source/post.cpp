@@ -14,7 +14,7 @@ const string postDatabase = "posts.json";
 } // namespace POST
 using namespace POST;
 
-//TODO: like & dislike
+// TODO: like & dislike
 
 /// @brief 清空
 void Post::clear() {
@@ -41,7 +41,7 @@ Post::Post() {
 /// @brief 创建一个新帖子
 Post::Post(const int &_ID, const int &_ownerID, const time_t &_date, const string &_title, const string &_content) {
     clear();
-    
+
     ID = _ID;
     ownerID = _ownerID;
     date = _date;
@@ -67,7 +67,7 @@ void Post::initPost(Json::Value &_post) {
     for (int j = 0; j < this->likeAmount; ++j) {
         this->likeID.push_back(_post["likeID"][j].asInt());
     }
-    //TODO: dislike
+    // TODO: dislike
 
     assert(_post.isMember("commentAmount") && _post.isMember("commentID"));
     this->commentAmount = _post["commentAmount"].asInt();
@@ -151,24 +151,43 @@ int Post::getOwnerID() {
 }
 
 /// @brief 根据选择的模式展示本帖子的数据
-/// @param mode 模式选择，0为隐私模式，1为完全展示模式
-void Post::displayPost(int mode = 0) {
-    // TODO
-    //  cout << "[Post START]" << endl;
-    // cout << "Date: " << getTimeString(output.date) << endl;
-    // cout << "Owner: " << USER::user[output.ownerID].nickName << endl;
-    // cout << "Title: " << output.title << endl;
-    // if (mode) cout << "Content: " << output.content << endl;
-    // cout << "Sum of Likes: " << output.likeAmount << endl;
-    // cout << "Sum of Comments: " << output.commentAmount << endl;
+/// @param mode 模式选择，0为简略模式，1为详细模式（但不显示评论）
+void Post::display(bool mode) {
+    outputTitle(this->title);
+    cout << outputHighlight(USER::user[this->ownerID].getNickName()) << ": ";
+    if (mode) {
+        cout << endl;
+        cout << this->content << endl;
+        cout << "Published on " << getTimeString(this->date) << endl;
+    } else {
+        if (this->content.length() >= 100) {
+            cout << this->content.substr(0, 100) << "..." << endl;
+        } else {
+            cout << this->content << endl;
+        }
+    }
+    displayInteractions();
+}
 
-    // if (mode) {
-    //     for (auto commentNumber : output.commentID) {
-    //         displayAllComments(COMMENT::comment[commentNumber], true);
-    //     }
-    // }
+/// @brief 展示赞同数、反对数、评论数
+void Post::displayInteractions() {
+    cout << Color::Modifier(Color::RESET, Color::BG_DEFAULT, Color::FG_LIGHT_GREEN)
+         << this->likeAmount
+         << Color::Modifier()
+         << " likes, "
+         << Color::Modifier(Color::RESET, Color::BG_DEFAULT, Color::FG_LIGHT_RED)
+         << this->dislikeAmount
+         << Color::Modifier()
+         << " dislikes, "
+         << outputHighlight(this->commentAmount)
+         << " comments." << endl;
+}
 
-    // cout << "[Post END]" << endl;
+/// @brief 输出评论内容
+void Post::displayComment() {
+    for (auto commentID : this->commentID) {
+        displayAllComments(COMMENT::comment[commentID], 1);
+    }
 }
 
 /// @brief 基于控制台的输入对帖子内容进行初始化
@@ -224,10 +243,8 @@ void Post::undoDislike(int dislikeID) {
 
 /// @brief 在本帖子下新增一条评论
 /// @param userID 发表评论的用户的ID
-void Post::addComment(int userID)
-{
+void Post::addComment(int userID) {
     COMMENT::comment[++COMMENT::commentAmount].initCommentConsole(userID);
     this->commentAmount++;
     this->commentID.push_back(COMMENT::commentAmount);
 }
-

@@ -34,10 +34,10 @@ public:
     void initCommentConsole(int ownerID);
     void addSubComment(int userID);
 
-    void likeThisComment(int likeID);
-    void undoLike(int likeID);
-    void dislikeThisComment(int dislikeID);
-    void undoDislike(int dislikeID);
+    // void likeThisComment(int likeID);
+    // void undoLike(int likeID);
+    // void dislikeThisComment(int dislikeID);
+    // void undoDislike(int dislikeID);
     
     void displayComment(int dep);
 };

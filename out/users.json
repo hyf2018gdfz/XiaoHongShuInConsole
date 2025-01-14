@@ -11,8 +11,11 @@
 			"passWord" : "123456Ab",
 			"personalDescription" : "This lazy guy hasn't written anything.",
 			"phoneNumber" : "13712345678",
-			"postAmount" : 0,
-			"postID" : [],
+			"postAmount" : 1,
+			"postID" : 
+			[
+				1
+			],
 			"registerTime" : 1736842513
 		},
 		{

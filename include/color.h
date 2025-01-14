@@ -46,8 +46,7 @@ public:
     Modifier(Code Mode, Code BackGround, Code FrontGround) :
         md(Mode), bg(BackGround), fg(FrontGround) {
     }
-    friend std::ostream &
-    operator<<(std::ostream &os, const Modifier &mod) {
+    friend std::ostream &operator<<(std::ostream &os, const Modifier &mod) {
         return os << "\033[" << mod.md << ";" << mod.bg << ";" << mod.fg << "m";
     }
     // 使用示例：cout << Color::Modifier(Color::BOLD, Color::BG_DEFAULT, Color::FG_RED) << "something" << Color::Modifier() << endl;
@@ -64,4 +63,10 @@ void outputFormat(string headStr, T folStr) {
          << Color::Modifier()
          << folStr << endl;
 }
+
+void outputTitle(string str);
+
+/// @brief 高亮一段文字
+#define outputHighlight(str) Color::Modifier(Color::RESET, Color::BG_DEFAULT, Color::FG_LIGHT_YELLOW) << (str) << Color::Modifier()
+
 #endif

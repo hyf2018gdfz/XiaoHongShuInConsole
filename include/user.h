@@ -39,12 +39,19 @@ public:
     string getPassword();
     string getNickName();
 
+    void displayPostAmount(bool viewpoint);
+    void displayPost();
+    void displayFollowingAmount(bool viewpoint);
+    void displayFollowing();
+    void displayFollowerAmount(bool viewpoint);
+    void displayFollower();
+
     bool isFollowing(int targetUserID);
     bool isFollower(int targetUserID);
     void followUser(int targetUserID);
     void unfollowUser(int targetUserID);
 
-    void displayUser(int mode);
+    void display(int mode);
     void launchPost();
     void launchComment(int curPostID);
     void launchSubComment(int curCommentID);

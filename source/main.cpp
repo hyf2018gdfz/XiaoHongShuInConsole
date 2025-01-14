@@ -72,9 +72,9 @@ int main() {
 
     cout << "Welcome, " << USER::user[currentUser].getNickName() << "!" << endl;
 
-    USER::user[currentUser].displayUser(1);
+    // USER::user[currentUser].display(1);
 
-    // viewMainPage();
+    viewMainPage();
     int a;
     cin >> a;
     return 0;

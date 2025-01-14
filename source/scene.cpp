@@ -1,6 +1,10 @@
-// #include "scene.h"
+#include "scene.h"
 
-// extern int currentUser;
+#include "user.h"
+#include "post.h"
+#include "comment.h"
+
+extern int currentUser;
 
 bool backToMainPage;
 
@@ -256,64 +260,64 @@ bool backToMainPage;
 //     }
 // }
 
-// void viewPostSquare() // 查看帖子广场
-// {
-//     while (backToMainPage) {
-//         // 输出界面信息以及交互指南
-//         clearScreen();
-//         cout << "Welcome to the Post Square!" << endl;
-//         cout << "There are " << POST::postAmount << " posts in total." << endl;
-//         for (int i = 1; i <= POST::postAmount; ++i) {
-//             cout << "## Post number " << i << "." << endl;
-//             POST::post[i].displayPost(0);
-//         }
-//         cout << "MENU---" << endl;
-//         cout << "Enter 1 to view a post in detail." << endl;
-//         cout << "Enter 2 to launch a post." << endl;
-//         cout << "Enter 0 to return." << endl;
-//         cout << "Enter -1 to return to the main page." << endl;
-//         cout << "---" << endl;
+void viewPostSquare() // 查看帖子广场
+{
+    while (backToMainPage) {
+        // 输出界面信息以及交互指南
+        clearScreen();
+        cout << "Welcome to the Post Square!" << endl;
+        cout << "There are " << POST::postAmount << " posts in total." << endl;
+        for (int i = 1; i <= POST::postAmount; ++i) {
+            cout << "## Post number " << i << "." << endl;
+            POST::post[i].display(false);
+        }
+        cout << "MENU---" << endl;
+        cout << "Enter 1 to view a post in detail." << endl;
+        cout << "Enter 2 to launch a post." << endl;
+        cout << "Enter 0 to return." << endl;
+        cout << "Enter -1 to return to the main page." << endl;
+        cout << "---" << endl;
 
-//         // 输入交互指令，然后按照交互指令跳转到其他的界面
-//         int cmd = readInt(-1, 2);
-//         if (cmd == -1) {
-//             backToMainPage = false;
-//             return;
-//         }
-//         if (cmd == 0)
-//             return;
-//         else if (cmd == 1) {
-//             if (POST::postAmount == 0) {
-//                 cout << "There is no post to view." << endl;
-//                 return doingNone();
-//             }
-//             cout << "Please enter the post number you want to view." << endl;
-//             int postNumber = readInt(1, POST::postAmount);
-//             viewPostDetail(POST::post[postNumber].getOwnerID(), postNumber);
-//         } else if (cmd == 2) {
-//             USER::user[currentUser].launchPost();
-//         }
-//     }
-// }
+        // 输入交互指令，然后按照交互指令跳转到其他的界面
+        int cmd = readInt(-1, 2);
+        if (cmd == -1) {
+            backToMainPage = false;
+            return;
+        }
+        if (cmd == 0)
+            return;
+        else if (cmd == 1) {
+            if (POST::postAmount == 0) {
+                cout << "There is no post to view." << endl;
+                return doingNone();
+            }
+            cout << "Please enter the post number you want to view." << endl;
+            int postNumber = readInt(1, POST::postAmount);
+            // viewPostDetail(POST::post[postNumber].getOwnerID(), postNumber);
+        } else if (cmd == 2) {
+            USER::user[currentUser].launchPost();
+        }
+    }
+}
 
-// void viewMainPage() {
-//     while (true) {
-//         clearScreen();
-//         backToMainPage = true;
-//         cout << "Welcome to the main page!" << endl;
-//         cout << "MENU---" << endl;
-//         cout << "Press 0 to logout." << endl;
-//         cout << "Press 1 to view my Profile." << endl;
-//         cout << "Press 2 to open the Post Square." << endl;
-//         cout << "---" << endl;
-//         int cmd = readInt(0, 2);
-//         if (cmd == 0) {
-//             cout << "Bye!" << endl;
-//             return;
-//         } else if (cmd == 1) {
-//             viewUserProfile(currentUser);
-//         } else if (cmd == 2) {
-//             viewPostSquare();
-//         }
-//     }
-// }
+void viewMainPage() {
+    while (true) {
+        clearScreen();
+        backToMainPage = true;
+        cout << "Welcome to the main page!" << endl;
+        cout << "MENU---" << endl;
+        cout << "Press 0 to logout." << endl;
+        cout << "Press 1 to view my Profile." << endl;
+        cout << "Press 2 to open the Post Square." << endl;
+        cout << "---" << endl;
+        int cmd = readInt(0, 2);
+        if (cmd == 0) {
+            cout << "Bye!" << endl;
+            return;
+        } else if (cmd == 1) {
+            // viewUserProfile(currentUser);
+        } else if (cmd == 2) {
+            viewPostSquare();
+        }
+    }
+}

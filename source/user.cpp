@@ -131,7 +131,7 @@ Json::Value *User::getUserJson() {
     (*userJson)["passWord"] = Json::Value(this->passWord);
     (*userJson)["nickName"] = Json::Value(this->nickName);
     (*userJson)["personalDescription"] = Json::Value(this->personalDescription);
-    
+
     (*userJson)["postAmount"] = Json::Value(this->postAmount);
     (*userJson)["postID"] = Json::arrayValue;
     for (int j = 0; j < this->postAmount; ++j) {
@@ -175,40 +175,35 @@ void overwriteUsers() {
 }
 
 /// @brief 根据选择的模式展示本用户的数据
-/// @param mode 模式选择，0为隐私模式，1为完全展示模式
-void User::displayUser(int mode = 0) {
+/// @param mode 模式选择，0为旁观视角，1为自己视角，2为上帝视角
+void User::display(int mode = 0) {
     assert(mode >= 0 && mode <= 2);
-    // basic information
-    cout << Color::Modifier(Color::BOLD, Color::BG_DEFAULT, Color::FG_CYAN)
-         << "User Profile---"
-         << Color::Modifier() << endl;
+    // 基本信息
+    outputTitle("User Profile---");
+
     outputFormat("User's nickname: ", this->nickName);
     outputFormat("User's personal description: ", this->personalDescription);
-    if (mode == 1) {
+    if (mode >= 1) {
         outputFormat("User's phone number: ", this->phoneNumber);
         outputFormat("User's register time: ", this->registerTime);
     }
     if (mode == 2) {
         outputFormat("User's password: ", this->passWord);
     }
-    cout << "---" << endl;
-    // posts information
-    cout << "User \"" << this->nickName << "\" has " << this->postAmount << " posts." << endl;
-    for (int i = 0; i < this->postAmount; ++i) {
-        cout << "## Post number " << i + 1 << "." << endl;
-        POST::post[this->postID[i]].displayPost(1);
-    }
-    cout << "---" << endl;
-    // following and followers information
-    cout << "User \"" << this->nickName << "\" has " << this->followingPeopleAmount << " followings." << endl;
-    for (auto userID : this->followingPeopleID)
-        cout << user[userID].nickName << endl;
+    outputTitle("---");
 
-    cout << "User \"" << this->nickName << "\" has " << this->followerAmount << " followers." << endl;
-    for (auto userID : this->followerID)
-        cout << user[userID].nickName << endl;
+    // 帖子信息
+    displayPostAmount(mode >= 1);
+    displayPost();
+    outputTitle("---");
 
-    cout << Color::Modifier(Color::BOLD, Color::BG_DEFAULT, Color::FG_CYAN) << "User Profile End---" << Color::Modifier() << endl;
+    // 关注信息
+    displayFollowingAmount(mode >= 1);
+    displayFollowing();
+    displayFollowerAmount(mode >= 1);
+    displayFollower();
+
+    outputTitle("User Profile End---");
 }
 
 /// @brief 让本用户发布一则新帖子
@@ -295,4 +290,58 @@ string User::getNickName() {
 /// @brief 获取本用户的密码
 string User::getPassword() {
     return this->passWord;
+}
+
+/// @brief 展示本用户的帖子数
+/// @param viewpoint 视角，true为自己视角，false为旁观视角
+void User::displayPostAmount(bool viewpoint = false) {
+    if (viewpoint) {
+        cout << "I have posted " << outputHighlight(this->postAmount) << " posts." << endl;
+    } else {
+        cout << outputHighlight(this->nickName) << " has posted " << outputHighlight(this->postAmount) << " posts." << endl;
+    }
+}
+
+// TODO: 如果待展示的内容行数很多，那么分批展示：按enter展示下面10行，按q结束展示
+
+/// @brief 展示本用户的帖子
+void User::displayPost() {
+    for (int i = 0; i < this->postAmount; ++i) {
+        cout << "## Post number " << outputHighlight(i + 1) << "." << endl;
+        POST::post[this->postID[i]].display(1);
+    }
+}
+
+/// @brief 展示本用户关注的人的人数
+/// @param viewpoint 视角，true为自己视角，false为旁观视角
+void User::displayFollowingAmount(bool viewpoint = false) {
+    if (viewpoint) {
+        cout << "I am following " << outputHighlight(this->followingPeopleAmount) << " people." << endl;
+    } else {
+        cout << outputHighlight(this->nickName) << " is following " << outputHighlight(this->followingPeopleAmount) << " people." << endl;
+    }
+}
+
+/// @brief 展示本用户关注的人
+void User::displayFollowing() {
+    for (int i = 0; i < this->followingPeopleAmount; ++i) {
+        cout << "Following " << outputHighlight(i + 1) << ": " << user[this->followingPeopleID[i]].nickName << endl;
+    }
+}
+
+/// @brief 展示本用户的粉丝数
+/// @param viewpoint 视角，true为自己视角，false为旁观视角
+void User::displayFollowerAmount(bool viewpoint = false) {
+    if (viewpoint) {
+        cout << "I have " << outputHighlight(this->followerAmount) << " followers." << endl;
+    } else {
+        cout << outputHighlight(this->nickName) << " has " << outputHighlight(this->followerAmount) << " followers." << endl;
+    }
+}
+
+/// @brief 展示本用户的粉丝
+void User::displayFollower() {
+    for (int i = 0; i < this->followerAmount; ++i) {
+        cout << "Follower " << outputHighlight(i + 1) << ": " << user[this->followerID[i]].nickName << endl;
+    }
 }
