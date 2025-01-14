@@ -59,7 +59,7 @@ public:
 /// @param folStr 具体信息
 template <typename T>
 void outputFormat(string headStr, T folStr) {
-    cout << Color::Modifier(Color::RESET, Color::BG_DEFAULT, Color::FG_CYAN)
+    cout << Color::Modifier(Color::RESET, Color::BG_DEFAULT, Color::FG_LIGHT_MAGENTA)
          << headStr
          << Color::Modifier()
          << folStr << endl;

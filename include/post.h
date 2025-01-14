@@ -40,7 +40,7 @@ public:
     void dislikeThisPost(int dislikeID);
     void undoDislike(int dislikeID);
 
-    void displayPost(int mode = 0);
+    void displayPost(int mode);
 };
 
 void initPosts();

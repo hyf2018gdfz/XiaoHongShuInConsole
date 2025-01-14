@@ -23,7 +23,7 @@ void User::clear() {
     passWord = "";
     nickName = "";
 
-    // personalDescription = "";
+    personalDescription = "";
 
     postAmount = 0;
     postID.clear();
@@ -42,6 +42,8 @@ User::User() {
 
 /// @brief 创建一个新用户
 User::User(const int &_ID, const time_t &_registerTime, const string &_phoneNumber, const string &_passWord, const string &_nickName) {
+    clear();
+
     ID = _ID;
     registerTime = _registerTime;
 
@@ -49,16 +51,7 @@ User::User(const int &_ID, const time_t &_registerTime, const string &_phoneNumb
     passWord = _passWord;
     nickName = _nickName;
 
-    // personalDescription = "";
-
-    postAmount = 0;
-    postID.clear();
-
-    followingPeopleAmount = 0;
-    followingPeopleID.clear();
-
-    followerAmount = 0;
-    followerID.clear();
+    personalDescription = "This lazy guy hasn't written anything.";
 }
 
 /// @brief 基于数据库初始化一个用户
@@ -66,19 +59,31 @@ User::User(const int &_ID, const time_t &_registerTime, const string &_phoneNumb
 void User::initUser(Json::Value &_user) {
     clear();
 
+    assert(_user.isMember("ID") && _user.isMember("registerTime"));
     this->ID = _user["ID"].asInt();
     this->registerTime = _user["registerTime"].asInt64();
+
+    assert(_user.isMember("phoneNumber") && _user.isMember("passWord") && _user.isMember("nickName"));
     this->phoneNumber = _user["phoneNumber"].asString();
     this->passWord = _user["passWord"].asString();
     this->nickName = _user["nickName"].asString();
+
+    assert(_user.isMember("personalDescription"));
+    this->personalDescription = _user["personalDescription"].asString();
+
+    assert(_user.isMember("postAmount") && _user.isMember("postID"));
     this->postAmount = _user["postAmount"].asInt();
     for (int j = 0; j < this->postAmount; ++j) {
         this->postID.push_back(_user["postID"][j].asInt());
     }
+
+    assert(_user.isMember("followingPeopleAmount") && _user.isMember("followingPeopleID"));
     this->followingPeopleAmount = _user["followingPeopleAmount"].asInt();
     for (int j = 0; j < this->followingPeopleAmount; ++j) {
         this->followingPeopleID.push_back(_user["followingPeopleID"][j].asInt());
     }
+
+    assert(_user.isMember("followerAmount") && _user.isMember("followerID"));
     this->followerAmount = _user["followerAmount"].asInt();
     for (int j = 0; j < this->followerAmount; ++j) {
         this->followerID.push_back(_user["followerID"][j].asInt());
@@ -106,6 +111,7 @@ void initUsers() {
         exit(-1);
     }
 
+    assert(root.isMember("users"));
     Json::Value users = root["users"];
     userAmount = users.size();
 
@@ -119,22 +125,26 @@ void initUsers() {
 /// @return 一个指向用户数据的指针
 Json::Value *User::getUserJson() {
     Json::Value *userJson = new Json::Value();
-    (*userJson)["ID"] = this->ID;
-    (*userJson)["registerTime"] = this->registerTime;
-    (*userJson)["phoneNumber"] = this->phoneNumber;
-    (*userJson)["passWord"] = this->passWord;
-    (*userJson)["nickName"] = this->nickName;
-    (*userJson)["postAmount"] = this->postAmount;
+    (*userJson)["ID"] = Json::Value(this->ID);
+    (*userJson)["registerTime"] = Json::Value(this->registerTime);
+    (*userJson)["phoneNumber"] = Json::Value(this->phoneNumber);
+    (*userJson)["passWord"] = Json::Value(this->passWord);
+    (*userJson)["nickName"] = Json::Value(this->nickName);
+    (*userJson)["personalDescription"] = Json::Value(this->personalDescription);
+    
+    (*userJson)["postAmount"] = Json::Value(this->postAmount);
     (*userJson)["postID"] = Json::arrayValue;
     for (int j = 0; j < this->postAmount; ++j) {
         (*userJson)["postID"].append(this->postID[j]);
     }
-    (*userJson)["followingPeopleAmount"] = this->followingPeopleAmount;
+
+    (*userJson)["followingPeopleAmount"] = Json::Value(this->followingPeopleAmount);
     (*userJson)["followingPeopleID"] = Json::arrayValue;
     for (int j = 0; j < this->followingPeopleAmount; ++j) {
         (*userJson)["followingPeopleID"].append(this->followingPeopleID[j]);
     }
-    (*userJson)["followerAmount"] = this->followerAmount;
+
+    (*userJson)["followerAmount"] = Json::Value(this->followerAmount);
     (*userJson)["followerID"] = Json::arrayValue;
     for (int j = 0; j < this->followerAmount; ++j) {
         (*userJson)["followerID"].append(this->followerID[j]);
@@ -167,25 +177,26 @@ void overwriteUsers() {
 /// @brief 根据选择的模式展示本用户的数据
 /// @param mode 模式选择，0为隐私模式，1为完全展示模式
 void User::displayUser(int mode = 0) {
+    assert(mode >= 0 && mode <= 2);
     // basic information
     cout << Color::Modifier(Color::BOLD, Color::BG_DEFAULT, Color::FG_CYAN)
          << "User Profile---"
          << Color::Modifier() << endl;
-
+    outputFormat("User's nickname: ", this->nickName);
+    outputFormat("User's personal description: ", this->personalDescription);
     if (mode == 1) {
-        outputFormat("User's Phone Number: ",this->phoneNumber);
+        outputFormat("User's phone number: ", this->phoneNumber);
+        outputFormat("User's register time: ", this->registerTime);
     }
-    outputFormat("User's Nickname: ",this->nickName);
-    if (mode == 1) {
-        outputFormat("User's Register Time: ",this->registerTime);
+    if (mode == 2) {
+        outputFormat("User's password: ", this->passWord);
     }
     cout << "---" << endl;
     // posts information
     cout << "User \"" << this->nickName << "\" has " << this->postAmount << " posts." << endl;
     for (int i = 0; i < this->postAmount; ++i) {
         cout << "## Post number " << i + 1 << "." << endl;
-        // TODO:展示帖子
-        //  displayPost(POST::post[this->postID[i]], mode);
+        POST::post[this->postID[i]].displayPost(1);
     }
     cout << "---" << endl;
     // following and followers information
@@ -285,4 +296,3 @@ string User::getNickName() {
 string User::getPassword() {
     return this->passWord;
 }
-

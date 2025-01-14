@@ -130,6 +130,7 @@ Json::Value *Comment::getCommentJson() {
     for (auto commentID : this->subCommentID) {
         (*commentJson)["subCommentID"].append(commentID);
     }
+    return commentJson;
 }
 
 /// @brief 向数据库中写入所有评论的数据

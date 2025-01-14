@@ -16,8 +16,7 @@ private:
     string passWord;
     string nickName;
 
-    // TODO: 个人简介
-    // string personalDescription;
+    string personalDescription;
 
     int postAmount;
     vector<int> postID;
@@ -45,7 +44,7 @@ public:
     void followUser(int targetUserID);
     void unfollowUser(int targetUserID);
 
-    void displayUser(int mode = 0);
+    void displayUser(int mode);
     void launchPost();
     void launchComment(int curPostID);
     void launchSubComment(int curCommentID);

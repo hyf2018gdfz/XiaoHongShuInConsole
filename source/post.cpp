@@ -119,6 +119,7 @@ Json::Value *Post::getPostJson() {
     (*postJson)["commentAmount"] = Json::Value(this->commentAmount);
     (*postJson)["commentID"] = Json::arrayValue;
     for (auto commentID : this->commentID) (*postJson)["commentID"].append(commentID);
+    return postJson;
 }
 
 /// @brief 向数据库中写入所有帖子的数据

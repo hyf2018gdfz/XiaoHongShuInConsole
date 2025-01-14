@@ -7,16 +7,13 @@
 			"followerID" : [],
 			"followingPeopleAmount" : 0,
 			"followingPeopleID" : [],
-			"nickName" : "Nick",
+			"nickName" : "Bob",
 			"passWord" : "123456Ab",
-			"phoneNumber" : "13774108520",
-			"postAmount" : 2,
-			"postID" : 
-			[
-				0,
-				1
-			],
-			"registerTime" : 1735452909
+			"personalDescription" : "This lazy guy hasn't written anything.",
+			"phoneNumber" : "13712345678",
+			"postAmount" : 0,
+			"postID" : [],
+			"registerTime" : 1736842513
 		},
 		{
 			"ID" : 2,
@@ -24,25 +21,13 @@
 			"followerID" : [],
 			"followingPeopleAmount" : 0,
 			"followingPeopleID" : [],
-			"nickName" : "Bob",
-			"passWord" : "123456Ab",
-			"phoneNumber" : "13712345678",
+			"nickName" : "Jack",
+			"passWord" : "123456Ba",
+			"personalDescription" : "This lazy guy hasn't written anything.",
+			"phoneNumber" : "13712348765",
 			"postAmount" : 0,
 			"postID" : [],
-			"registerTime" : 1735453025
-		},
-		{
-			"ID" : 3,
-			"followerAmount" : 0,
-			"followerID" : [],
-			"followingPeopleAmount" : 0,
-			"followingPeopleID" : [],
-			"nickName" : "MIC",
-			"passWord" : "123456Abé -蝶の夢-블」²Æ VΛū ͟͝͞Ⅱ́̕ I",
-			"phoneNumber" : "13712345687",
-			"postAmount" : 0,
-			"postID" : [],
-			"registerTime" : 1735526872
+			"registerTime" : 1736842649
 		}
 	]
 }
