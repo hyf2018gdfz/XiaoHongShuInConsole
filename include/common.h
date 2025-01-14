@@ -1,0 +1,37 @@
+/// @brief: 本头文件包含了常用的四个头文件iostream、string、vector和json.h，后面不需要再次包含这些头文件
+
+#ifndef _COMMON
+#define _COMMON
+
+#include <time.h>
+#include <assert.h>
+#include <string>
+#include <iostream>
+#include <vector>
+#include "json.h"
+
+namespace fromstd {
+using std::vector;
+using std::string;
+using std::cin;
+using std::cout;
+using std::endl;
+using std::cerr;
+using std::ifstream;
+using std::ofstream;
+} // namespace fromstd
+using namespace fromstd;
+
+const int N = 10005;
+
+int readInt(int rangeL, int rangeR);
+time_t getTime();
+string getTimeString(time_t &curtime);
+
+void clearScreen();
+void doingNone();
+
+// TODO: 写入日志
+// void writeLog();
+
+#endif
