@@ -323,10 +323,10 @@ void viewMainPage() {
     }
 }
 
-Page::Page() {
-    content = "Default content.";
-    // menu = nullptr;
-}
+// Page::Page() {
+//     content = "Default content.";
+//     // menu = nullptr;
+// }
 
 // void Page::display() {
 //     cout << content << endl;

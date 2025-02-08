@@ -1,5 +1,5 @@
-#ifndef _USER
-#define _USER
+#ifndef _USER_H
+#define _USER_H
 
 #include <unordered_map>
 
@@ -34,7 +34,7 @@ public:
     User(const int &_ID, const time_t &_registerTime, const string &_phoneNumber, const string &_passWord, const string &_nickName);
 
     void initUser(Json::Value &_user);
-    Json::Value* getUserJson();
+    Json::Value *getUserJson();
 
     string getPassword();
     string getNickName();

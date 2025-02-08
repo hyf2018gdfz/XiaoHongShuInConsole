@@ -1,5 +1,5 @@
-#ifndef _LOGIN
-#define _LOGIN
+#ifndef _LOGIN_H
+#define _LOGIN_H
 #include <bits/stdc++.h>
 #include "common.h"
 using namespace std;

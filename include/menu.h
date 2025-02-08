@@ -1,5 +1,5 @@
-#ifndef _MENU
-#define _MENU
+#ifndef _MENU_H
+#define _MENU_H
 #include "common.h"
 
 class Page;
@@ -30,9 +30,12 @@ private:
     void setParent(const variant<shared_ptr<Menu>, shared_ptr<Page>> &parent);
 
 public:
-    Menu(const variant<shared_ptr<Menu>, shared_ptr<Page>> &parent);
+    int lstOp = 0;
+
+public:
+    Menu(const string &title, const variant<shared_ptr<Menu>, shared_ptr<Page>> &parent);
     void addItem(const shared_ptr<MenuItem> &item);
-    int display(int opLine); // 显示菜单
+    void display(int opLine); // 显示菜单
 
     variant<shared_ptr<Menu>, shared_ptr<Page>> getItemTarget(int opLine);
     int getItemsAmt();

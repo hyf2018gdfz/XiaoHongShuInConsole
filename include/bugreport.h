@@ -1,7 +1,6 @@
-#ifndef _BUGREPORT
-#define _BUGREPORT
-enum Bug
-{
+#ifndef _BUGREPORT_H
+#define _BUGREPORT_H
+enum Bug {
     Succeed,
 
     InvalidPhoneNumberLength,

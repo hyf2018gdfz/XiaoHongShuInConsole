@@ -1,5 +1,6 @@
 #include "menu.h"
 
+#include "page.h"
 #include "color.h"
 
 // MenuItem类的实现
@@ -23,8 +24,8 @@ std::variant<std::shared_ptr<Menu>, std::shared_ptr<Page>> MenuItem::getTarget()
 
 // Menu类的实现
 
-Menu::Menu(const variant<shared_ptr<Menu>, shared_ptr<Page>> &parent) {
-    title = "Please choose the options by up and down key or entering the number of the option.";
+Menu::Menu(const string &title = "Please choose the options by up and down key or entering the number of the option.", const variant<shared_ptr<Menu>, shared_ptr<Page>> &parent) {
+    this->title = title;
     this->parent = parent;
 }
 
@@ -36,7 +37,7 @@ void Menu::addItem(const shared_ptr<MenuItem> &item) {
     items.push_back(item);
 }
 
-int Menu::display(int opLine) {
+void Menu::display(int opLine) {
     outputTitle(title);
     assert(0 <= opLine && opLine <= items.size());
     for (int i = 0; i <= items.size(); ++i) {

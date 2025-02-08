@@ -1,7 +1,7 @@
 /// @brief: 本头文件包含了常用的四个头文件iostream、string、vector和json.h，后面不需要再次包含这些头文件
 
-#ifndef _COMMON
-#define _COMMON
+#ifndef _COMMON_H
+#define _COMMON_H
 
 #include <time.h>
 #include <assert.h>

@@ -1,5 +1,5 @@
-#ifndef _SCENE
-#define _SCENE
+#ifndef _SCENE_H
+#define _SCENE_H
 
 // WARNING: 这个模块需要重构
 
@@ -22,19 +22,19 @@ void viewMainPage();
 // class Menu;
 
 // 界面类
-class Page {
-    // friend class Menu;
+// class Page {
+//     // friend class Menu;
 
-private:
-    string content;
-    // Menu *menu;
+// private:
+//     string content;
+//     // Menu *menu;
 
-    void flush();
+//     void flush();
 
-public:
-    Page();
-    void display();
-};
+// public:
+//     Page();
+//     void display();
+// };
 
 // 目录类
 // class Menu {

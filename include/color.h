@@ -1,5 +1,5 @@
-#ifndef _COLOR
-#define _COLOR
+#ifndef _COLOR_H
+#define _COLOR_H
 #include "common.h"
 namespace Color {
 enum Code {

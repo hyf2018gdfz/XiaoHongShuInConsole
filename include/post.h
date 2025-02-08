@@ -1,5 +1,5 @@
-#ifndef _POST
-#define _POST
+#ifndef _POST_H
+#define _POST_H
 
 #include "common.h"
 
@@ -25,12 +25,12 @@ private:
 public:
     Post();
     Post(const int &_ID, const int &_ownerID, const time_t &_date, const string &_title, const string &_content);
-    
+
     void initPost(Json::Value &_post);
     Json::Value *getPostJson();
 
     void initPostConsole(int ownerID);
-    //TODO: void editPostConsole(int ownerID);
+    // TODO: void editPostConsole(int ownerID);
     void addComment(int userID);
 
     int getOwnerID();

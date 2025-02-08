@@ -1,5 +1,5 @@
-#ifndef _REGISTER
-#define _REGISTER
+#ifndef _REGISTER_H
+#define _REGISTER_H
 #include <bits/stdc++.h>
 #include "common.h"
 using namespace std;

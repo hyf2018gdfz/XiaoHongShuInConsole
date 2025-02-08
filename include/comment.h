@@ -1,5 +1,5 @@
-#ifndef _COMMENT
-#define _COMMENT
+#ifndef _COMMENT_H
+#define _COMMENT_H
 
 #include "common.h"
 
@@ -29,7 +29,7 @@ public:
     Json::Value *getCommentJson();
 
     int getOwnerID();
-    vector<int>& getSubCommentID();
+    vector<int> &getSubCommentID();
 
     void initCommentConsole(int ownerID);
     void addSubComment(int userID);
@@ -38,7 +38,7 @@ public:
     // void undoLike(int likeID);
     // void dislikeThisComment(int dislikeID);
     // void undoDislike(int dislikeID);
-    
+
     void displayComment(int dep);
 };
 
