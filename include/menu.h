@@ -4,6 +4,7 @@
 
 class Page;
 class Menu;
+class PageNav;
 
 class MenuItem {
 private:
@@ -20,6 +21,8 @@ public:
 };
 
 class Menu {
+    friend class PageNav;
+
 private:
     string title;
     vector<shared_ptr<MenuItem>> items;                 // 子菜单项
@@ -35,7 +38,7 @@ public:
 public:
     Menu(const string &title, const variant<shared_ptr<Menu>, shared_ptr<Page>> &parent);
     void addItem(const shared_ptr<MenuItem> &item);
-    void display(int opLine); // 显示菜单
+    void display(int opLine = -1); // 显示菜单
 
     variant<shared_ptr<Menu>, shared_ptr<Page>> getItemTarget(int opLine);
     int getItemsAmt();

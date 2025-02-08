@@ -37,8 +37,9 @@ void Menu::addItem(const shared_ptr<MenuItem> &item) {
     items.push_back(item);
 }
 
-void Menu::display(int opLine) {
+void Menu::display(int opLine = -1) {
     outputTitle(title);
+    if (opLine == -1) opLine = lstOp;
     assert(0 <= opLine && opLine <= items.size());
     for (int i = 0; i <= items.size(); ++i) {
         if (i == opLine) {
