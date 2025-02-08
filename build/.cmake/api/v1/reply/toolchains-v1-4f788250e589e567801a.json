@@ -1,0 +1,91 @@
+{
+	"kind" : "toolchains",
+	"toolchains" : 
+	[
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"D:/Program Files/w64devkit-1.18.0/w64devkit/lib/gcc/x86_64-w64-mingw32/12.2.0/include",
+						"D:/Program Files/w64devkit-1.18.0/w64devkit/lib/gcc/x86_64-w64-mingw32/12.2.0/include-fixed",
+						"D:/Program Files/w64devkit-1.18.0/w64devkit/x86_64-w64-mingw32/include"
+					],
+					"linkDirectories" : [],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : []
+				},
+				"path" : "D:/Program Files/w64devkit-1.18.0/w64devkit/bin/gcc.exe",
+				"version" : "12.2.0"
+			},
+			"language" : "C",
+			"sourceFileExtensions" : 
+			[
+				"c",
+				"m"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"D:/Program Files/w64devkit-1.18.0/w64devkit/lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++",
+						"D:/Program Files/w64devkit-1.18.0/w64devkit/lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/x86_64-w64-mingw32",
+						"D:/Program Files/w64devkit-1.18.0/w64devkit/lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/backward",
+						"D:/Program Files/w64devkit-1.18.0/w64devkit/lib/gcc/x86_64-w64-mingw32/12.2.0/include",
+						"D:/Program Files/w64devkit-1.18.0/w64devkit/lib/gcc/x86_64-w64-mingw32/12.2.0/include-fixed",
+						"D:/Program Files/w64devkit-1.18.0/w64devkit/x86_64-w64-mingw32/include"
+					],
+					"linkDirectories" : [],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : []
+				},
+				"path" : "D:/Program Files/w64devkit-1.18.0/w64devkit/bin/g++.exe",
+				"version" : "12.2.0"
+			},
+			"language" : "CXX",
+			"sourceFileExtensions" : 
+			[
+				"C",
+				"M",
+				"c++",
+				"cc",
+				"cpp",
+				"cxx",
+				"mm",
+				"mpp",
+				"CPP",
+				"ixx",
+				"cppm",
+				"ccm",
+				"cxxm",
+				"c++m"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"implicit" : {},
+				"path" : "D:/Program Files/w64devkit-1.18.0/w64devkit/bin/windres.exe"
+			},
+			"language" : "RC",
+			"sourceFileExtensions" : 
+			[
+				"rc",
+				"RC"
+			]
+		}
+	],
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}

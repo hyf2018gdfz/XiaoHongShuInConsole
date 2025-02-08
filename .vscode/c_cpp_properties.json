@@ -11,7 +11,7 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "D:\\Program Files\\w64devkit-1.18.0\\w64devkit\\bin\\gcc.exe",
+            "compilerPath": "D:\\Program Files\\w64devkit-1.18.0\\w64devkit\\bin\\g++.exe",
             "cStandard": "c17",
             "intelliSenseMode": "windows-gcc-x64",
             "configurationProvider": "ms-vscode.cmake-tools"
