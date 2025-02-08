@@ -4,7 +4,7 @@ set(PROJECT_NAME ChatBox) # 设置工程名
 
 project(${PROJECT_NAME})    # 工程名 CppTemplate
 
-set(CMAKE_CXX_STANDARD 14) # C++标准
+set(CMAKE_CXX_STANDARD 17) # C++标准
 set(CMAKE_CXX_STANDARD_REQUIRED ON) # C++标准是必须的
 
 set(CMAKE_BUILD_TYPE "Debug")  # Debug模式 选项: Release Debug MinSizeRel RelWithDebInfo

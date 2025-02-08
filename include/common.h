@@ -8,6 +8,8 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <memory>
+#include <variant>
 #include "json.h"
 
 namespace fromstd {
@@ -19,6 +21,10 @@ using std::endl;
 using std::cerr;
 using std::ifstream;
 using std::ofstream;
+using std::variant;
+using std::unique_ptr;
+using std::shared_ptr;
+using std::weak_ptr;
 } // namespace fromstd
 using namespace fromstd;
 

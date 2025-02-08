@@ -3,6 +3,7 @@
 #include "user.h"
 #include "post.h"
 #include "comment.h"
+#include "color.h"
 
 extern int currentUser;
 
@@ -321,3 +322,43 @@ void viewMainPage() {
         }
     }
 }
+
+Page::Page() {
+    content = "Default content.";
+    // menu = nullptr;
+}
+
+// void Page::display() {
+//     cout << content << endl;
+//     menu->display(1);
+// }
+
+// Menu::Menu() {
+//     title = "Please choose the options by up and down key or entering the number of the option.";
+//     itemTitle = "Default";
+//     parent = nullptr;
+//     itemResult = nullptr;
+// }
+
+// string Menu::getItemTitle() {
+//     return itemTitle;
+// }
+
+// void Menu::addItem(Menu *item) {
+//     items.push_back(item);
+// }
+
+// int Menu::display(int opLine) {
+//     if (opLine == 0) return;
+//     outputTitle(title);
+//     assert(1 <= opLine && opLine <= items.size());
+//     for (int i = 1; i <= items.size(); ++i) {
+//         if (i == opLine) {
+//             cout << Color::Modifier(Color::BOLD, Color::BG_DEFAULT, Color::FG_RED) << "-> " << Color::Modifier();
+//         } else {
+//             cout << "   ";
+//         }
+//         cout << Color::Modifier(Color::RESET, Color::BG_DEFAULT, Color::FG_LIGHT_YELLOW) << i << "). " << Color::Modifier();
+//         cout << items[i - 1]->getItemTitle() << endl;
+//     }
+// }
