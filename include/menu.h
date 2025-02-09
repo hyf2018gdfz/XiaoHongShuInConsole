@@ -4,43 +4,51 @@
 
 class Page;
 class Menu;
-class PageNav;
+// class PageNav;
+
+using ptrMenu = shared_ptr<Menu>;
+using ptrPage = shared_ptr<Page>;
 
 class MenuItem {
 private:
     string content;
-    variant<shared_ptr<Menu>, shared_ptr<Page>> target;
+    variant<ptrMenu, ptrPage> target;
 
 private:
-    void setTarget(const variant<shared_ptr<Menu>, shared_ptr<Page>> &target);
+    void setTarget(const variant<ptrMenu, ptrPage> &target);
 
 public:
-    MenuItem(const string &content, const variant<shared_ptr<Menu>, shared_ptr<Page>> &target);
+    MenuItem();
+    MenuItem(const string &content, const variant<ptrMenu, ptrPage> &target);
     string getContent();
-    variant<shared_ptr<Menu>, shared_ptr<Page>> getTarget() const;
+    variant<ptrMenu, ptrPage> getTarget() const;
 };
 
 class Menu {
-    friend class PageNav;
+    // friend class PageNav;
 
 private:
-    string title;
-    vector<shared_ptr<MenuItem>> items;                 // 子菜单项
-    variant<shared_ptr<Menu>, shared_ptr<Page>> parent; // 父菜单或父界面项
+    string title = "Please choose the options by up and down key or entering the number of the option.";
+    vector<shared_ptr<MenuItem>> items; // 子菜单项
 
 private:
     void setTitle(const string &title);
-    void setParent(const variant<shared_ptr<Menu>, shared_ptr<Page>> &parent);
+    void setParent(const variant<ptrMenu, ptrPage> &parent);
 
 public:
-    int lstOp = 0;
+    int lstOp = 0; // 用户上一次停留在该目录时的选项
 
 public:
-    Menu(const string &title, const variant<shared_ptr<Menu>, shared_ptr<Page>> &parent);
+    Menu(const string &title, const variant<ptrMenu, ptrPage> &parent);
     void addItem(const shared_ptr<MenuItem> &item);
-    void display(int opLine = -1); // 显示菜单
+    void display(int opLine); // 显示菜单
 
-    variant<shared_ptr<Menu>, shared_ptr<Page>> getItemTarget(int opLine);
+    variant<ptrMenu, ptrPage> getItemTarget(int opLine);
     int getItemsAmt();
+};
+
+// testing
+
+class Page {
 };
 #endif

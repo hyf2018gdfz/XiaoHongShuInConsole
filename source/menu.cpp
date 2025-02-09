@@ -1,11 +1,16 @@
 #include "menu.h"
 
-#include "page.h"
+// #include "page.h"
 #include "color.h"
 
 // MenuItem类的实现
 
-MenuItem::MenuItem(const string &content, const std::variant<std::shared_ptr<Menu>, std::shared_ptr<Page>> &target) {
+MenuItem::MenuItem() {
+    this->content = "Default Menu Item";
+    this->target = std::make_shared<Menu>(nullptr);
+}
+
+MenuItem::MenuItem(const string &content, const variant<ptrMenu, ptrPage> &target) {
     this->content = content;
     this->target = target;
 }
@@ -14,19 +19,18 @@ string MenuItem::getContent() {
     return content;
 }
 
-void MenuItem::setTarget(const std::variant<std::shared_ptr<Menu>, std::shared_ptr<Page>> &target) {
+void MenuItem::setTarget(const variant<ptrMenu, ptrPage> &target) {
     this->target = target;
 }
 
-std::variant<std::shared_ptr<Menu>, std::shared_ptr<Page>> MenuItem::getTarget() const {
+variant<ptrMenu, ptrPage> MenuItem::getTarget() const {
     return target;
 }
 
 // Menu类的实现
 
-Menu::Menu(const string &title = "Please choose the options by up and down key or entering the number of the option.", const variant<shared_ptr<Menu>, shared_ptr<Page>> &parent) {
+Menu::Menu(const string &title, const variant<ptrMenu, ptrPage> &parent) {
     this->title = title;
-    this->parent = parent;
 }
 
 void Menu::setTitle(const string &title) {
@@ -49,7 +53,7 @@ void Menu::display(int opLine = -1) {
         }
         cout << Color::Modifier(Color::RESET, Color::BG_DEFAULT, Color::FG_LIGHT_YELLOW) << i << "). " << Color::Modifier();
         if (i == 0) {
-            if (std::holds_alternative<shared_ptr<Menu>>(parent)) {
+            if (holds_alternative<ptrMenu>(parent)) {
                 cout << "Back to the last menu" << endl;
             } else {
                 cout << "Back to the last page" << endl;
@@ -60,7 +64,7 @@ void Menu::display(int opLine = -1) {
     }
 }
 
-variant<shared_ptr<Menu>, shared_ptr<Page>> Menu::getItemTarget(int opLine) {
+variant<ptrMenu, ptrPage> Menu::getItemTarget(int opLine) {
     assert(0 <= opLine && opLine <= items.size());
     if (opLine == 0) {
         return parent;
@@ -73,6 +77,6 @@ int Menu::getItemsAmt() {
     return items.size();
 }
 
-void Menu::setParent(const variant<shared_ptr<Menu>, shared_ptr<Page>> &parent) {
+void Menu::setParent(const variant<ptrMenu, ptrPage> &parent) {
     this->parent = parent;
 }
