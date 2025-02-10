@@ -1,4 +1,4 @@
-/// @brief: 本头文件包含了常用的四个头文件iostream、string、vector和json.h，后面不需要再次包含这些头文件
+/// @brief: 本头文件包含了常用的一些头文件以及在std中的一些函数
 
 #ifndef _COMMON_H
 #define _COMMON_H
@@ -25,6 +25,7 @@ using std::variant;
 using std::unique_ptr;
 using std::shared_ptr;
 using std::weak_ptr;
+using std::move;
 } // namespace fromstd
 using namespace fromstd;
 
